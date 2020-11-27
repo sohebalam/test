@@ -1,8 +1,7 @@
-const mongoose = require("mongoose")
+import mongoose from "mongoose"
 const User = mongoose.model("users")
-const passport = require("passport")
-const GoogleStrategy = require("passport-google-oauth20").Strategy
-const keys = require("../config/keys.js")
+import passport from "passport"
+import { Strategy as GoogleStrategy } from "passport-google-oauth20"
 
 passport.serializeUser((user, done) => {
   done(null, user.id)
@@ -17,8 +16,9 @@ passport.deserializeUser((id, done) => {
 passport.use(
   new GoogleStrategy(
     {
-      clientID: keys.googleClientID,
-      clientSecret: keys.googleClientSecret,
+      clientID:
+        "130210432692-8dujh2mskmmpa0ij50imvvmuv0e7b322.apps.googleusercontent.com",
+      clientSecret: "wyg0ZiGagZJ0Jm2u-Z556K8E",
       callbackURL: "/auth/google/callback",
       proxy: true,
     },
@@ -31,11 +31,11 @@ passport.use(
           new User({
             googleId: profile.id,
             name: profile.displayName,
-            firstname: profile.given_name,
-            lastname: profile.family_name,
+            // firstname: _json.given_name,
+            // lastname: _json.family_name,
             email: profile.emails[0].value,
             photo: profile.photos[0].value.split("?")[0],
-            locale: profile.locale,
+            // locale: _json.locale,
           })
             .save()
             .then((user) => done(null, user))
@@ -44,3 +44,5 @@ passport.use(
     }
   )
 )
+
+export default GoogleStrategy

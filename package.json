@@ -3,9 +3,10 @@
   "version": "1.0.0",
   "description": "MERN stack blog app with google auth",
   "main": "server.js",
+  "type": "module",
   "scripts": {
     "client-install": "npm install --prefix client",
-    "start": "node server.js",
+    "start": "nodemon server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",

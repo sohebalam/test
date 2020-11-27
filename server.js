@@ -1,16 +1,17 @@
-const express = require("express")
-const mongoose = require("mongoose")
-const passport = require("passport")
-const cookieSession = require("cookie-session")
-const bodyParser = require("body-parser")
-const path = require("path")
+import express from "express"
+import mongoose from "mongoose"
+import passport from "passport"
+import cookieSession from "cookie-session"
+import bodyParser from "body-parser"
+import path from "path"
+import user from "./models/User.js"
+import passportConfig from "./config/passport.js"
+import auth from "./routes/auth.js"
 
 const app = express()
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
-const auth = require("./routes/auth")
-
-require("./models/User.js")
+// const auth = require("./routes/auth")
 
 app.use(
   cookieSession({
@@ -20,7 +21,7 @@ app.use(
 )
 
 // MongoDB configuration
-const db = require("./config/keys").mongoURI
+const db = "mongodb://localhost:27017/test"
 
 // Use mongoose to connect to mongoDB
 mongoose
@@ -33,13 +34,11 @@ app.use(passport.initialize())
 app.use(passport.session())
 
 // Passport config
-require("./config/passport")
 
 //Use routes from routes folder
-//app.use("/api/auth", auth);
-//app.use("/api/posts", posts);
+app.use("/auth", auth)
+//app.use("/api/posts", posts)
 
-require("./routes/auth.js")(app)
 // require("./routes/posts.js")(app);
 
 // Server static assets if in production
