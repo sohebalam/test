@@ -15,6 +15,7 @@ const UserSchema = new Schema({
   email: {
     type: String,
     required: true,
+    unique: true,
   },
   photo: {
     type: String,
@@ -25,13 +26,3 @@ const UserSchema = new Schema({
 })
 
 module.exports = User = mongoose.model("users", UserSchema)
-
-// const mongoose = require("mongoose");
-// const { Schema } = mongoose;
-// const userSchema = new Schema({
-//   googleId: String,
-//   email: String,
-//   facebookId: String,
-//   name: String
-// });
-// mongoose.model("users", userSchema);
