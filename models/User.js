@@ -12,6 +12,14 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
+  firstname: {
+    type: String,
+    required: true,
+  },
+  lastname: {
+    type: String,
+    required: true,
+  },
   email: {
     type: String,
     required: true,
@@ -22,6 +30,10 @@ const UserSchema = new Schema({
     required: true,
     default:
       "https://res.cloudinary.com/geekysrm/image/upload/v1542221619/default-user.png",
+  },
+  locale: {
+    type: String,
+    required: true,
   },
 })
 

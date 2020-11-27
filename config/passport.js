@@ -31,8 +31,11 @@ passport.use(
           new User({
             googleId: profile.id,
             name: profile.displayName,
+            firstname: profile.given_name,
+            lastname: profile.family_name,
             email: profile.emails[0].value,
             photo: profile.photos[0].value.split("?")[0],
+            locale: profile.locale,
           })
             .save()
             .then((user) => done(null, user))
